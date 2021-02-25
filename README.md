@@ -8,7 +8,7 @@ This app helps you to memorize the day that the Golden Gate Bridge was built. Th
 
 ### App Walk-though
 
-<img src="https://media.giphy.com/media/Bdabz0MFjxOduLHBJ0/giphy.gif" width=200><br>
+<img src="https://media.giphy.com/media/BP8YZjRZPD8WRwCoDK/giphy.gif" width=200><br>
 
 ## Required
 - [x] Create New Project in Xcode
