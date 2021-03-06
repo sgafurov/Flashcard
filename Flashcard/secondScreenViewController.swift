@@ -1,19 +1,18 @@
 //
-//  ViewController.swift
+//  secondScreenViewController.swift
 //  Flashcard
 //
-//  Created by Shakhram Gafurov on 2/24/21.
+//  Created by Shakhram Gafurov on 3/6/21.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class secondScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//random comment...
         // Do any additional setup after loading the view.
     }
-
-
+    
 }
-
