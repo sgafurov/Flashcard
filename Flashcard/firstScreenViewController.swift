@@ -19,6 +19,7 @@ class firstScreenViewController: UIViewController {
     @IBOutlet weak var optionTwo: UIButton!
     @IBOutlet weak var optionThree: UIButton!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var plusButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -45,7 +46,15 @@ class firstScreenViewController: UIViewController {
         resetButton.layer.cornerRadius = 8.0;
         resetButton.layer.borderWidth = 1.0;
         resetButton.layer.borderColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
+        
+        plusButton.layer.cornerRadius = 8.0;
+        plusButton.layer.borderWidth = 1.0;
+        plusButton.layer.borderColor = #colorLiteral(red: 0.1285564005, green: 0.3894066513, blue: 1, alpha: 1)
         // Do any additional setup after loading the view.
+    }
+    
+    func updateFlashcard(question: String, answer: String) {
+        //function body
     }
     
     @IBAction func didTapOptionOne(_ sender: Any) {
