@@ -181,7 +181,9 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="answerText" destination="OWQ-h0-PLe" id="OB1-v1-Gqf"/>
+                        <outlet property="answerTextField" destination="OWQ-h0-PLe" id="ac0-0M-BoZ"/>
                         <outlet property="questionText" destination="dfq-GH-asB" id="gOv-Hx-JUX"/>
+                        <outlet property="questionTextField" destination="dfq-GH-asB" id="xgv-ln-f0h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9i-we-flh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

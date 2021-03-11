@@ -22,7 +22,7 @@ class secondScreenViewController: UIViewController {
     
     @IBAction func didTapOnDone(_ sender: Any) {
         let questionText = questionTextField.text
-        
+
         let answerText = answerTextField.text
         
         flashcardsController.updateFlashcard(question: questionText!, answer: answerText!)

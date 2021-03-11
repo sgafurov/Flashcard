@@ -52,10 +52,7 @@ class firstScreenViewController: UIViewController {
         plusButton.layer.borderColor = #colorLiteral(red: 0.1285564005, green: 0.3894066513, blue: 1, alpha: 1)
         // Do any additional setup after loading the view.
     }
-    
-    func updateFlashcard(question: String, answer: String) {
-        //function body
-    }
+
     
     @IBAction func didTapOptionOne(_ sender: Any) {
         questionLabel.isHidden = true;
@@ -79,6 +76,11 @@ class firstScreenViewController: UIViewController {
         questionLabel.isHidden = false;
         answerLabel.isHidden = true;
         falseLabel.isHidden = true;
+    }
+    
+    func updateFlashcard(question: String, answer: String) {
+        questionLabel.text = question;
+        answerLabel.text = answer;
     }
     
     
