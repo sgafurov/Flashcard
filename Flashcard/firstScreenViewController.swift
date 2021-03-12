@@ -4,7 +4,6 @@
 //
 //  Created by Shakhram Gafurov on 2/24/21.
 //
-
 import UIKit
 
 class firstScreenViewController: UIViewController {
@@ -13,7 +12,6 @@ class firstScreenViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var falseLabel: UILabel!
-    
     
     @IBOutlet weak var optionOne: UIButton!
     @IBOutlet weak var optionTwo: UIButton!
@@ -70,32 +68,42 @@ class firstScreenViewController: UIViewController {
         let creationController = navigationController.topViewController as! secondScreenViewController
         creationController.flashcardsController = self;
         
+        if segue.identifier == "EditSegue"{
         creationController.initialQuestion = questionLabel.text;
         creationController.initialAnswer = answerLabel.text;
+            //creationController.extraInitialAnswer1 =  optionOne.textInputContextIdentifier
+        }
+        
     }
     
     //for the large, main flashcard
     @IBAction func didTapOnFlashcard(_ sender: Any) {
         if (hide == false){
         questionLabel.isHidden = false;
+        answerLabel.isHidden = true;
         hide = true;
         } else if(hide==true){
         questionLabel.isHidden = true;
+        answerLabel.isHidden = false;
         hide = false;
         }
     } 
     
     //updates main flashcard w/ custom Q & A created in
     //the second view controller
-    func updateFlashcard(question: String, answer: String) {
+    func updateFlashcard(question: String, answer: String, extraAnswerOne: String?, extraAnswerTwo: String?) {
+        
         questionLabel.text = question;
         answerLabel.text = answer;
+        
+        optionOne.setTitle(extraAnswerOne, for: .normal)
+        optionTwo.setTitle(answer, for: .normal)
+        optionThree.setTitle(extraAnswerTwo, for: .normal)
+        
         answerLabel.isHidden = false;
-        falseLabel.isHidden = true;
-        optionOne.isHidden = true
-        optionTwo.isHidden = true
-        optionThree.isHidden = true
+        
     }
+    
     
     @IBAction func didTapOptionOne(_ sender: Any) {
         questionLabel.isHidden = true;
@@ -120,6 +128,4 @@ class firstScreenViewController: UIViewController {
 //        answerLabel.isHidden = true;
 //        falseLabel.isHidden = true;
 //    }
-
 }
-
