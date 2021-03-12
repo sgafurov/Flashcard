@@ -12,12 +12,15 @@ class secondScreenViewController: UIViewController {
     @IBOutlet weak var questionTextField: UITextField!
     @IBOutlet weak var answerTextField: UITextField!
     
+    var initialQuestion: String?
+    var initialAnswer: String?
+    
     var flashcardsController: firstScreenViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//random comment...
-        // Do any additional setup after loading the view.
+        questionTextField.text = initialQuestion
+        answerTextField.text = initialAnswer
     }
     
     @IBAction func didTapOnDone(_ sender: Any) {

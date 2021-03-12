@@ -20,9 +20,11 @@ class firstScreenViewController: UIViewController {
     @IBOutlet weak var optionThree: UIButton!
     //@IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     
     var hide:Bool = false;
     
+    //gives round corners and borders to the labels/buttons
     override func viewDidLoad() {
         super.viewDidLoad()
         card.layer.cornerRadius = 20.0;
@@ -55,15 +57,24 @@ class firstScreenViewController: UIViewController {
         plusButton.layer.cornerRadius = 8.0;
         plusButton.layer.borderWidth = 1.0;
         plusButton.layer.borderColor = #colorLiteral(red: 0.1285564005, green: 0.3894066513, blue: 1, alpha: 1)
+        
+        editButton.layer.cornerRadius = 8.0;
+        editButton.layer.borderWidth = 1.0;
+        editButton.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         // Do any additional setup after loading the view.
     }
 
+    //for the + button and pencil button
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationController = segue.destination as! UINavigationController
         let creationController = navigationController.topViewController as! secondScreenViewController
         creationController.flashcardsController = self;
+        
+        creationController.initialQuestion = questionLabel.text;
+        creationController.initialAnswer = answerLabel.text;
     }
     
+    //for the large, main flashcard
     @IBAction func didTapOnFlashcard(_ sender: Any) {
         if (hide == false){
         questionLabel.isHidden = false;
@@ -74,9 +85,13 @@ class firstScreenViewController: UIViewController {
         }
     } 
     
+    //updates main flashcard w/ custom Q & A created in
+    //the second view controller
     func updateFlashcard(question: String, answer: String) {
         questionLabel.text = question;
         answerLabel.text = answer;
+        answerLabel.isHidden = false;
+        falseLabel.isHidden = true;
         optionOne.isHidden = true
         optionTwo.isHidden = true
         optionThree.isHidden = true
