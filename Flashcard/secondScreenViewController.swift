@@ -14,6 +14,9 @@ class secondScreenViewController: UIViewController {
     @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var extraAnswerTextField2: UITextField!
     
+    /**
+     * takes the questions and answers we had in the first view controller and pre-loads it into the Text Fields on the edit screen
+     */
     var initialQuestion: String?
     var initialAnswer: String?
     var extraInitialAnswer1: String?
@@ -29,6 +32,11 @@ class secondScreenViewController: UIViewController {
         extraAnswerTextField2.text = extraInitialAnswer2
     }
     
+    /**
+     * provides error message for empty text fields
+     * variables hold the String typed into the text fields
+     * sends the String values in the text fields to the updateFlashcard method (of the first view controller) so we can see those txts as flashcards
+     */
     @IBAction func didTapOnDone(_ sender: Any) {
         let alert = UIAlertController(title: "Uh oh", message: "Please enter both a question and an answer", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
@@ -38,14 +46,14 @@ class secondScreenViewController: UIViewController {
 
         let answerText = answerTextField.text //holds whatever is typed into the answer text field
         
-        let extraanswerText1 = extraAnswerTextField1.text //
+        let extraanswerText1 = extraAnswerTextField1.text //for the first button
         
-        let extraanswerText2 = extraAnswerTextField2.text
+        let extraanswerText2 = extraAnswerTextField2.text //for the last button
 
         if (questionText == " " || answerText == " " || questionText!.isEmpty || answerText!.isEmpty) {
             present(alert, animated: true)
         } else {
-            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswerOne: extraanswerText1, extraAnswerTwo: extraanswerText2)
+            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswerOne: extraanswerText1!, extraAnswerTwo: extraanswerText2!)
         dismiss(animated: true)
         }
     }

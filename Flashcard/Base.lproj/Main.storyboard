@@ -20,53 +20,28 @@
                                 <rect key="frame" x="36" y="217" width="343" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mk0-0y-fqD">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="False" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mk0-0y-fqD">
                                         <rect key="frame" x="0.0" y="-1" width="343" height="201"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="False">
-                                                <attributes>
-                                                    <color key="NSColor" red="1" green="0.34260075369999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <font key="NSFont" size="23" name="Rockwell-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                        <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="23"/>
+                                        <color key="textColor" red="1" green="0.34260075369999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoP-h7-VWm">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="June 29, 2007" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoP-h7-VWm">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemTealColor"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="June 29, 2007">
-                                                <attributes>
-                                                    <color key="NSBackgroundColor" red="0.13333" green="0.13333" blue="0.13333" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                    <font key="NSFont" size="23" name="Helvetica-Light"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                        <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="23"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7f-4V-sKp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="When was the first iPhone released in the United States?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7f-4V-sKp">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="When was the first iPhone released in the United States?">
-                                                <attributes>
-                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                    <font key="NSFont" size="23" name="Helvetica-Light"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="10" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                        <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="23"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -113,7 +88,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgC-Eo-WTM">
-                                <rect key="frame" x="114" y="790" width="80" height="56"/>
+                                <rect key="frame" x="114" y="793" width="78" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <state key="normal" title="+"/>
@@ -122,7 +97,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JGK-zi-Qz7">
-                                <rect key="frame" x="225" y="790" width="80" height="56"/>
+                                <rect key="frame" x="223" y="793" width="78" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="1" green="0.34260075369999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal">
@@ -145,6 +120,24 @@
                                     <segue destination="cjq-fE-zFo" kind="presentation" identifier="EditSegue" id="70i-Og-pdh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcG-Nh-akf">
+                                <rect key="frame" x="20" y="790" width="70" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Prev"/>
+                                <connections>
+                                    <action selector="didTapOnPrev:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SRm-L0-gWc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Si-vQ-Rd2">
+                                <rect key="frame" x="324" y="793" width="70" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="didTapOnNext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hWn-15-QAZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -154,10 +147,12 @@
                         <outlet property="card" destination="rpa-NZ-a2v" id="VyY-Hj-0JU"/>
                         <outlet property="editButton" destination="JGK-zi-Qz7" id="GJx-ZE-gMi"/>
                         <outlet property="falseLabel" destination="mk0-0y-fqD" id="g85-Hv-ERc"/>
+                        <outlet property="nextButton" destination="6Si-vQ-Rd2" id="gsg-Zl-LsH"/>
                         <outlet property="optionOne" destination="qj9-RF-PiK" id="bKE-he-uTl"/>
                         <outlet property="optionThree" destination="FEw-zS-QS7" id="0Xn-D1-ZaL"/>
                         <outlet property="optionTwo" destination="8fv-Ol-hXB" id="fla-hn-UqE"/>
                         <outlet property="plusButton" destination="rgC-Eo-WTM" id="mgo-2k-SmD"/>
+                        <outlet property="prevButton" destination="PcG-Nh-akf" id="6Qe-Q6-6PA"/>
                         <outlet property="questionLabel" destination="Z7f-4V-sKp" id="Zwx-tS-EvD"/>
                     </connections>
                 </viewController>
@@ -275,7 +270,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LT8-X6-9g4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="809" y="58"/>
+            <point key="canvasLocation" x="836" y="58"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
