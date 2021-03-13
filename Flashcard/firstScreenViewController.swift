@@ -71,9 +71,13 @@ class firstScreenViewController: UIViewController {
         if segue.identifier == "EditSegue"{
         creationController.initialQuestion = questionLabel.text;
         creationController.initialAnswer = answerLabel.text;
-            //creationController.extraInitialAnswer1 =  optionOne.textInputContextIdentifier
+            
+            creationController.extraInitialAnswer1 =  optionOne.titleLabel?.text
+            
+            creationController.initialAnswer =  optionTwo.titleLabel?.text
+           
+            creationController.extraInitialAnswer2 =  optionThree.titleLabel?.text
         }
-        
     }
     
     //for the large, main flashcard
@@ -89,16 +93,15 @@ class firstScreenViewController: UIViewController {
         }
     } 
     
-    //updates main flashcard w/ custom Q & A created in
-    //the second view controller
+    //updates main flashcard w/ custom Q & A created in the second view controller
     func updateFlashcard(question: String, answer: String, extraAnswerOne: String?, extraAnswerTwo: String?) {
         
-        questionLabel.text = question;
-        answerLabel.text = answer;
+        questionLabel.text = question; //the front part of the label
+        answerLabel.text = answer; //the flipside of the label
         
-        optionOne.setTitle(extraAnswerOne, for: .normal)
-        optionTwo.setTitle(answer, for: .normal)
-        optionThree.setTitle(extraAnswerTwo, for: .normal)
+        optionOne.setTitle(extraAnswerOne, for: .normal) //the first button on the screen
+        optionTwo.setTitle(answer, for: .normal) //the middle button (that has the correct answer)
+        optionThree.setTitle(extraAnswerTwo, for: .normal) //the last button
         
         answerLabel.isHidden = false;
         

@@ -10,13 +10,14 @@ import UIKit
 class secondScreenViewController: UIViewController {
     
     @IBOutlet weak var questionTextField: UITextField!
-    @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var extraAnswerTextField1: UITextField!
+    @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var extraAnswerTextField2: UITextField!
     
     var initialQuestion: String?
     var initialAnswer: String?
     var extraInitialAnswer1: String?
+    var extraInitialAnswer2: String?
     
     var flashcardsController: firstScreenViewController!
 
@@ -25,6 +26,7 @@ class secondScreenViewController: UIViewController {
         questionTextField.text = initialQuestion
         answerTextField.text = initialAnswer
         extraAnswerTextField1.text = extraInitialAnswer1
+        extraAnswerTextField2.text = extraInitialAnswer2
     }
     
     @IBAction func didTapOnDone(_ sender: Any) {
@@ -32,11 +34,11 @@ class secondScreenViewController: UIViewController {
         let okAction = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(okAction)
                 
-        let questionText = questionTextField.text
+        let questionText = questionTextField.text //this var holds whatever is typed into the question's text field
 
-        let answerText = answerTextField.text
+        let answerText = answerTextField.text //holds whatever is typed into the answer text field
         
-        let extraanswerText1 = extraAnswerTextField1.text
+        let extraanswerText1 = extraAnswerTextField1.text //
         
         let extraanswerText2 = extraAnswerTextField2.text
 
