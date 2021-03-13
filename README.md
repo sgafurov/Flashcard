@@ -5,8 +5,7 @@ This app helps you to memorize answers to questions. There are three selections 
 
 ### App Walk-though
 
-<img src="https://media.giphy.com/media/Xraf6rJdVnaO7wPPRo/source.mov" width=200><br>
-
+<iframe src="https://giphy.com/embed/Xraf6rJdVnaO7wPPRo" width="240" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Xraf6rJdVnaO7wPPRo">via GIPHY</a></p>
 ## Required
 - [x] User can open the creation screen
 - [x] User can cancel out of the creation screen
