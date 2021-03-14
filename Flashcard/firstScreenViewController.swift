@@ -71,8 +71,8 @@ class firstScreenViewController: UIViewController {
         editButton.layer.borderWidth = 1.0;
         editButton.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         
+        updateFlashcard(question: "When was the first iPhone released in the United States?", answer: "June 29, 2007", extraAnswerOne: "July 9, 2008", extraAnswerTwo: "January 3, 2007");
     }
-
     
     /**
      * for when we click on the PLUS or PENCIL button
@@ -101,21 +101,6 @@ class firstScreenViewController: UIViewController {
     }
     
     /**
-     * when we click on the big main flashcard to see Q and A.
-     */
-    @IBAction func didTapOnFlashcard(_ sender: Any) {
-        if (hide == false){
-        questionLabel.isHidden = false;
-        answerLabel.isHidden = true;
-        hide = true;
-        } else if(hide==true){
-        questionLabel.isHidden = true;
-        answerLabel.isHidden = false;
-        hide = false;
-        }
-    } 
-    
-    /**
      * updates the big flashcard with custom Q & A values created in the second view controller.
      * creates a Flashcard object, updates the labels, and appends the Flashcard to our array.
      * the function we want to call when the app starts.
@@ -132,8 +117,47 @@ class firstScreenViewController: UIViewController {
         optionThree.setTitle(flashcard.extraAnswerTwo, for: .normal) //the last button
                 
         flashcards.append(flashcard) //appending the flashcard object we created above in this method, into the array
+        print("I added a new flashcard!")
+        print("I now have \(flashcards.count) flashcard!")
+        currentIndex = flashcards.count-1
+        print("Our current index is \(currentIndex)")
+        
+        //updates the prev and next buttons everytime we add a flashcard
+        updateNextPrevButtons();
     }
     
+    func updateNextPrevButtons(){
+        //diables the next button if we are at end of flashcard array
+        if(currentIndex == flashcards.count-1){
+            nextButton.isEnabled = false
+            prevButton.isEnabled = true
+        } else {
+            nextButton.isEnabled = true
+            prevButton.isEnabled = true
+        }
+        
+        //diables the prev button if we are only at beginning of flashcard array
+        if(currentIndex == 0){
+            prevButton.isEnabled = false
+        } else {
+            prevButton.isEnabled = true
+        }
+    }
+    
+    /**
+     * when we click on the big main flashcard to see Q and A.
+     */
+    @IBAction func didTapOnFlashcard(_ sender: Any) {
+        if (hide == false){
+        questionLabel.isHidden = false;
+        answerLabel.isHidden = true;
+        hide = true;
+        } else if(hide==true){
+        questionLabel.isHidden = true;
+        answerLabel.isHidden = false;
+        hide = false;
+        }
+    }
     
     @IBAction func didTapOptionOne(_ sender: Any) {
         questionLabel.isHidden = true;
@@ -154,8 +178,9 @@ class firstScreenViewController: UIViewController {
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
+        currentIndex = currentIndex + 1;
     }
     @IBAction func didTapOnPrev(_ sender: Any) {
     }
-
+    
 }
