@@ -122,18 +122,17 @@ class firstScreenViewController: UIViewController {
         currentIndex = flashcards.count-1
         print("Our current index is \(currentIndex)")
         
-        //updates the prev and next buttons everytime we add a flashcard
+            //updates the prev and next buttons everytime we add a flashcard
         updateNextPrevButtons();
+        updateLabels();
     }
     
     func updateNextPrevButtons(){
         //diables the next button if we are at end of flashcard array
         if(currentIndex == flashcards.count-1){
             nextButton.isEnabled = false
-            prevButton.isEnabled = true
         } else {
             nextButton.isEnabled = true
-            prevButton.isEnabled = true
         }
         
         //diables the prev button if we are only at beginning of flashcard array
@@ -178,9 +177,35 @@ class firstScreenViewController: UIViewController {
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
+        questionLabel.isHidden = false
+        answerLabel.isHidden = true
+        falseLabel.isHidden = true
         currentIndex = currentIndex + 1;
+        updateLabels();
+        updateNextPrevButtons();
     }
     @IBAction func didTapOnPrev(_ sender: Any) {
+        questionLabel.isHidden = false
+        answerLabel.isHidden = true
+        falseLabel.isHidden = true
+        currentIndex = currentIndex - 1;
+        updateLabels();
+        updateNextPrevButtons();
+    }
+    
+    func updateLabels(){
+        //get current flashcard
+        let currentFlashcard = flashcards[currentIndex]
+        //update our labels
+        questionLabel.text = currentFlashcard.question
+        answerLabel.text = currentFlashcard.answer;
+        optionOne.setTitle(currentFlashcard.extraAnswerOne, for: .normal) //the first button on the screen
+        optionTwo.setTitle(currentFlashcard.answer, for: .normal) //the middle button (that has the correct answer)
+        optionThree.setTitle(currentFlashcard.extraAnswerTwo, for: .normal) //the last button
+    }
+    
+    func saveAllFlashcardsToDisk(){
+        UserDefaults.standard.setValue(flashcards, forKey: "flashcards")
     }
     
 }
