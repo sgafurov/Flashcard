@@ -116,12 +116,12 @@ class firstScreenViewController: UIViewController {
         
         let flashcard = Flashcard(question: question, answer: answer, extraAnswerOne: extraAnswerOne, extraAnswerTwo: extraAnswerTwo) //creating flashcard object
         
-        questionLabel.text = flashcard.question; //the front part of the label
-        answerLabel.text = flashcard.answer; //the flipside of the label
+        // questionLabel.text = flashcard.question; //the front part of the label
+        // answerLabel.text = flashcard.answer; //the flipside of the label
         
-        optionOne.setTitle(flashcard.extraAnswerOne, for: .normal) //the first button on the screen
-        optionTwo.setTitle(flashcard.answer, for: .normal) //the middle button (that has the correct answer)
-        optionThree.setTitle(flashcard.extraAnswerTwo, for: .normal) //the last button
+        // optionOne.setTitle(flashcard.extraAnswerOne, for: .normal) //the first button on the screen
+        // optionTwo.setTitle(flashcard.answer, for: .normal) //the middle button (that has the correct answer)
+        // optionThree.setTitle(flashcard.extraAnswerTwo, for: .normal) //the last button
                 
         flashcards.append(flashcard) //appending the flashcard object we created above in this method, into the array
         print("I added a new flashcard!")
@@ -167,11 +167,11 @@ class firstScreenViewController: UIViewController {
      */
     func saveAllFlashcardsToDisk(){
         //saves array on disk
-        UserDefaults.standard.set(flashcards, forKey: "flashcards")
+        //UserDefaults.standard.set(flashcards, forKey: "flashcards")
         
         //from flashcard aaray to dictionary array
         let dictionaryArray = flashcards.map { (card) -> [String: String] in
-            return ["question": card.question, "answer": card.answer, "optionOne": card.extraAnswerOne, "optionTwo": card.answer, "optionThree": card.extraAnswerTwo]
+            return ["question": card.question, "answer": card.answer, "optionOne": card.extraAnswerOne, "optionThree": card.extraAnswerTwo]
         }
         UserDefaults.standard.set(dictionaryArray, forKey: "flashcards")
             //log it
@@ -185,7 +185,7 @@ class firstScreenViewController: UIViewController {
         //check for existing flashcards stored in UserDefaults
         if let dictionaryArray = UserDefaults.standard.array(forKey: "flashcards") as? [[String: String]] {
             let savedCards = dictionaryArray.map { dictionary -> Flashcard in
-                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!, extraAnswerOne: dictionary["optionOne"]!, extraAnswerTwo: <#T##String#>: dictionary["optionTwo"]!)
+                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!, extraAnswerOne: dictionary["optionOne"]!, extraAnswerTwo: dictionary["optionThree"]!)
             }
             
             //put all these cards in our flashcard array
