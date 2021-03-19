@@ -71,7 +71,14 @@ class firstScreenViewController: UIViewController {
         editButton.layer.borderWidth = 1.0;
         editButton.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         
+        readSavedFlashcards();
+        
+        if flashcards.count == 0 {
         updateFlashcard(question: "When was the first iPhone released in the United States?", answer: "June 29, 2007", extraAnswerOne: "July 9, 2008", extraAnswerTwo: "January 3, 2007");
+        } else {
+            updateLabels()
+            updateNextPrevButtons()
+        }
     }
     
     /**
@@ -125,6 +132,7 @@ class firstScreenViewController: UIViewController {
             //updates the prev and next buttons everytime we add a flashcard
         updateNextPrevButtons();
         updateLabels();
+        saveAllFlashcardsToDisk()
     }
     
     func updateNextPrevButtons(){
@@ -140,6 +148,49 @@ class firstScreenViewController: UIViewController {
             prevButton.isEnabled = false
         } else {
             prevButton.isEnabled = true
+        }
+    }
+    
+    func updateLabels(){
+        //get current flashcard
+        let currentFlashcard = flashcards[currentIndex]
+        //update our labels
+        questionLabel.text = currentFlashcard.question
+        answerLabel.text = currentFlashcard.answer;
+        optionOne.setTitle(currentFlashcard.extraAnswerOne, for: .normal) //the first button on the screen
+        optionTwo.setTitle(currentFlashcard.answer, for: .normal) //the middle button (that has the correct answer)
+        optionThree.setTitle(currentFlashcard.extraAnswerTwo, for: .normal) //the last button
+    }
+    
+    /**
+     * save our array of flashcards to the disk.
+     */
+    func saveAllFlashcardsToDisk(){
+        //saves array on disk
+        UserDefaults.standard.set(flashcards, forKey: "flashcards")
+        
+        //from flashcard aaray to dictionary array
+        let dictionaryArray = flashcards.map { (card) -> [String: String] in
+            return ["question": card.question, "answer": card.answer, "optionOne": card.extraAnswerOne, "optionTwo": card.answer, "optionThree": card.extraAnswerTwo]
+        }
+        UserDefaults.standard.set(dictionaryArray, forKey: "flashcards")
+            //log it
+            print("Flashcards saved to UserDefaults!!!")
+    }
+    
+    /**
+     * What we want is to first read previously saved flashcards (if any).
+     */
+    func readSavedFlashcards(){
+        //check for existing flashcards stored in UserDefaults
+        if let dictionaryArray = UserDefaults.standard.array(forKey: "flashcards") as? [[String: String]] {
+            let savedCards = dictionaryArray.map { dictionary -> Flashcard in
+                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!, extraAnswerOne: dictionary["optionOne"]!, extraAnswerTwo: <#T##String#>: dictionary["optionTwo"]!)
+            }
+            
+            //put all these cards in our flashcard array
+            flashcards.append(contentsOf: savedCards)
+            
         }
     }
     
@@ -192,20 +243,5 @@ class firstScreenViewController: UIViewController {
         updateLabels();
         updateNextPrevButtons();
     }
-    
-    func updateLabels(){
-        //get current flashcard
-        let currentFlashcard = flashcards[currentIndex]
-        //update our labels
-        questionLabel.text = currentFlashcard.question
-        answerLabel.text = currentFlashcard.answer;
-        optionOne.setTitle(currentFlashcard.extraAnswerOne, for: .normal) //the first button on the screen
-        optionTwo.setTitle(currentFlashcard.answer, for: .normal) //the middle button (that has the correct answer)
-        optionThree.setTitle(currentFlashcard.extraAnswerTwo, for: .normal) //the last button
-    }
-    
-    func saveAllFlashcardsToDisk(){
-        UserDefaults.standard.setValue(flashcards, forKey: "flashcards")
-    }
-    
+
 }
