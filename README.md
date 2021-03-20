@@ -5,7 +5,7 @@ This app helps you to memorize answers to questions. There are three selections 
 
 ### App Walk-though
 
-<img src="https://im7.ezgif.com/tmp/ezgif-7-53c87bd750fe.gif" width=200><br>
+<img src="file:///Users/shakhram/Downloads/ezgif-7-53c87bd750fe-2.gif" width=200><br>
 
 ## Required
 - [x] User can browse through multiple flashcards
