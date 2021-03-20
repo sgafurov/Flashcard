@@ -26,6 +26,7 @@ class firstScreenViewController: UIViewController {
     
     @IBOutlet weak var plusButton: UIButton! //DIMENSIONS= W:78 H:51
     @IBOutlet weak var editButton: UIButton! //DIMENSIONS= W:78 H:51
+    @IBOutlet weak var deleteButton: UIButton! // W: 78 H: 49
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var prevButton: UIButton!
@@ -69,12 +70,16 @@ class firstScreenViewController: UIViewController {
         
         editButton.layer.cornerRadius = 8.0;
         editButton.layer.borderWidth = 1.0;
-        editButton.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        editButton.layer.borderColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        
+        deleteButton.layer.cornerRadius = 8.0;
+        deleteButton.layer.borderWidth = 1.0;
+        deleteButton.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         
         readSavedFlashcards();
         
         if flashcards.count == 0 {
-        updateFlashcard(question: "When was the first iPhone released in the United States?", answer: "June 29, 2007", extraAnswerOne: "July 9, 2008", extraAnswerTwo: "January 3, 2007");
+            updateFlashcard(question: "When was the first iPhone released in the United States?", answer: "June 29, 2007", extraAnswerOne: "July 9, 2008", extraAnswerTwo: "January 3, 2007", isExisting: false);
         } else {
             updateLabels()
             updateNextPrevButtons()
@@ -112,7 +117,7 @@ class firstScreenViewController: UIViewController {
      * creates a Flashcard object, updates the labels, and appends the Flashcard to our array.
      * the function we want to call when the app starts.
      */
-    func updateFlashcard(question: String, answer: String, extraAnswerOne: String, extraAnswerTwo: String) {
+    func updateFlashcard(question: String, answer: String, extraAnswerOne: String, extraAnswerTwo: String, isExisting: Bool) {
         
         let flashcard = Flashcard(question: question, answer: answer, extraAnswerOne: extraAnswerOne, extraAnswerTwo: extraAnswerTwo) //creating flashcard object
         
@@ -123,12 +128,16 @@ class firstScreenViewController: UIViewController {
         // optionTwo.setTitle(flashcard.answer, for: .normal) //the middle button (that has the correct answer)
         // optionThree.setTitle(flashcard.extraAnswerTwo, for: .normal) //the last button
                 
+        if isExisting {
+            //replace the existing flashcard
+            flashcards[currentIndex] = flashcard
+        } else {
         flashcards.append(flashcard) //appending the flashcard object we created above in this method, into the array
         print("I added a new flashcard!")
         print("I now have \(flashcards.count) flashcard!")
         currentIndex = flashcards.count-1
         print("Our current index is \(currentIndex)")
-        
+        }
             //updates the prev and next buttons everytime we add a flashcard
         updateNextPrevButtons();
         updateLabels();
@@ -243,5 +252,35 @@ class firstScreenViewController: UIViewController {
         updateLabels();
         updateNextPrevButtons();
     }
-
+    
+    
+    @IBAction func didTapOnDelete(_ sender: Any) {
+        let alert = UIAlertController(title: "Delete flashcard", message: "Are you sure you want to delete it?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+            self.deleteCurrentFlashcard()
+        }
+        alert.addAction(deleteAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+    
+    func deleteCurrentFlashcard(){
+        //delete current flashcard
+        flashcards.remove(at: currentIndex)
+        print("❌ flashcard was removed")
+        
+        //if last card was deleted, update the current card index to reflect correct count-1
+        if currentIndex > flashcards.count-1{
+            currentIndex = flashcards.count-1
+        }
+        //if we delete the only flashcard in the app, set currentIndex to 0 and fill flashcard with generic texts
+        if flashcards.count == 0 {
+            currentIndex = 0;
+            updateFlashcard(question: "-----", answer: "-----", extraAnswerOne: "-----", extraAnswerTwo: "-----", isExisting: false);
+        }
+        updateNextPrevButtons()
+        updateLabels()
+        saveAllFlashcardsToDisk()
+    }
 }

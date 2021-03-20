@@ -23,7 +23,7 @@ class secondScreenViewController: UIViewController {
     var extraInitialAnswer2: String?
     
     var flashcardsController: firstScreenViewController!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         questionTextField.text = initialQuestion
@@ -53,7 +53,11 @@ class secondScreenViewController: UIViewController {
         if (questionText == " " || answerText == " " || questionText!.isEmpty || answerText!.isEmpty) {
             present(alert, animated: true)
         } else {
-            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswerOne: extraanswerText1!, extraAnswerTwo: extraanswerText2!)
+            var isExisting = false;
+            if initialQuestion != nil {
+                isExisting = true
+            }
+            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswerOne: extraanswerText1!, extraAnswerTwo: extraanswerText2!, isExisting: isExisting)
         dismiss(animated: true)
         }
     }
