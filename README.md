@@ -1,3 +1,23 @@
+## Lab 3
+
+### App Description
+This app helps you to memorize answers to questions. There are three selections to choose from to check and see if the answer you selected is the correct one. For now, only the middle answer can be set as the correct answer. You can add, edit, and delete flashcards. This app can remember the flashcards you made when you exit and revisit the app.
+
+### App Walk-though
+
+<img src="https://im7.ezgif.com/tmp/ezgif-7-53c87bd750fe.gif" width=200><br>
+
+## Required
+- [x] User can browse through multiple flashcards
+- [x] User can re-open the app and see previously created flashcards
+- [x] Push code to GitHub
+## Optional
+- [x] User can delete a flashcard
+- [x] User can edit existing flashcard
+- [x] User can store multiple choice questions
+
+
+
 ## Lab 2
 
 ### App Description
