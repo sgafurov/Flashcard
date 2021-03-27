@@ -64,9 +64,9 @@ class firstScreenViewController: UIViewController {
         optionThree.layer.borderWidth = 3.0;
         optionThree.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
-        plusButton.layer.cornerRadius = 8.0;
-        plusButton.layer.borderWidth = 1.0;
-        plusButton.layer.borderColor = #colorLiteral(red: 0.1285564005, green: 0.3894066513, blue: 1, alpha: 1)
+//        plusButton.layer.cornerRadius = 8.0;
+//        plusButton.layer.borderWidth = 1.0;
+//        plusButton.layer.borderColor = #colorLiteral(red: 0.1285564005, green: 0.3894066513, blue: 1, alpha: 1)
         
         editButton.layer.cornerRadius = 8.0;
         editButton.layer.borderWidth = 1.0;
@@ -207,15 +207,40 @@ class firstScreenViewController: UIViewController {
      * when we click on the big main flashcard to see Q and A.
      */
     @IBAction func didTapOnFlashcard(_ sender: Any) {
-        if (hide == false){
-        questionLabel.isHidden = false;
-        answerLabel.isHidden = true;
-        hide = true;
-        } else if(hide==true){
-        questionLabel.isHidden = true;
-        answerLabel.isHidden = false;
-        hide = false;
-        }
+//        if (hide == false){
+//        questionLabel.isHidden = false;
+//        answerLabel.isHidden = true;
+//        hide = true;
+//        } else if(hide==true){
+//        questionLabel.isHidden = true;
+//        answerLabel.isHidden = false;
+//        hide = false;
+//        }
+        flipFlashcard();
+    }
+    
+    func flipFlashcard(){
+//        if (hide == false){
+//        questionLabel.isHidden = false;
+//        answerLabel.isHidden = true;
+//        hide = true;
+//        } else if(hide==true){
+//        questionLabel.isHidden = true;
+//        answerLabel.isHidden = false;
+//        hide = false;
+//        }
+        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            if (self.hide == true){
+                self.questionLabel.isHidden = true;
+                self.answerLabel.isHidden = false;
+                self.hide = false;
+            } else if(self.hide==false){
+                self.questionLabel.isHidden = false;
+                self.answerLabel.isHidden = true;
+                self.hide = true;
+            }
+        })
+
     }
     
     @IBAction func didTapOptionOne(_ sender: Any) {
