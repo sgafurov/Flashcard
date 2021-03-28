@@ -44,21 +44,15 @@ class firstScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         popUpLabel.isHidden=true;//🌈
+        hide = true;
         
         card.layer.cornerRadius = 20.0;
         card.clipsToBounds = true; //🌈
-        //card.layer.shadowRadius = 55.0
-        //card.layer.shadowOpacity = 0.3
         
         questionLabel.layer.cornerRadius = 20.0;
         questionLabel.clipsToBounds = true; //🌈
         questionLabel.layer.borderWidth = 3.0;
         questionLabel.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        
-        //answerLabel.layer.cornerRadius = 20.0;
-        //answerLabel.clipsToBounds = true; //🌈
-        //answerLabel.layer.borderWidth = 3.0;
-        //answerLabel.layer.borderColor = #colorLiteral(red: 0.5485007167, green: 1, blue: 0.5137608051, alpha: 1)
         
         falseLabel.layer.cornerRadius = 20.0;
         falseLabel.clipsToBounds = true; //🌈
