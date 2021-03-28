@@ -86,6 +86,38 @@ class firstScreenViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        
+        //first, start with the flashcard looking invisible and smaller in size
+        card.alpha = 0.0
+        card.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        optionOne.alpha = 0.0
+        optionOne.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        optionTwo.alpha = 0.0
+        optionTwo.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        optionThree.alpha = 0.0
+        optionThree.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        //animation
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.card.alpha = 1
+            self.card.transform = CGAffineTransform.identity
+            
+            self.optionOne.alpha = 1
+            self.optionOne.transform = CGAffineTransform.identity
+            
+            self.optionTwo.alpha = 1
+            self.optionTwo.transform = CGAffineTransform.identity
+            
+            self.optionThree.alpha = 1
+            self.optionThree.transform = CGAffineTransform.identity
+        })
+    }
+    
     /**
      * for when we click on the PLUS or PENCIL button
      */
@@ -266,16 +298,18 @@ class firstScreenViewController: UIViewController {
         answerLabel.isHidden = true
         falseLabel.isHidden = true
         currentIndex = currentIndex + 1;
-        updateLabels();
+        
         updateNextPrevButtons();
+        animateCardOutNext(); //animates cards when you press next
     }
     @IBAction func didTapOnPrev(_ sender: Any) {
         questionLabel.isHidden = false
         answerLabel.isHidden = true
         falseLabel.isHidden = true
         currentIndex = currentIndex - 1;
-        updateLabels();
+        
         updateNextPrevButtons();
+        animateCardOutPrev(); //animates cards when you press prev
     }
     
     
@@ -307,5 +341,61 @@ class firstScreenViewController: UIViewController {
         updateNextPrevButtons()
         updateLabels()
         saveAllFlashcardsToDisk()
+    }
+    
+    func animateCardOutNext(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+            self.optionOne.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+            self.optionTwo.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+            self.optionThree.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+        }, completion: { finished in
+            self.updateLabels()
+            self.animateCardInNext()
+        })
+    }
+    func animateCardInNext(){
+        
+        //start on the right side and dont animate this
+        card.transform  = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+        optionOne.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+        optionTwo.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+        optionThree.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+        
+        //animate card going back to original position
+        UIView.animate(withDuration: 0.3){
+            self.card.transform = CGAffineTransform.identity
+            self.optionOne.transform = CGAffineTransform.identity
+            self.optionTwo.transform = CGAffineTransform.identity
+            self.optionThree.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func animateCardOutPrev(){
+        UIView.animate(withDuration: 0.2, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+            self.optionOne.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+            self.optionTwo.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+            self.optionThree.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+        }, completion: { finished in
+            self.updateLabels()
+            self.animateCardInPrev()
+        })
+    }
+    func animateCardInPrev(){
+        
+        //start on the right side and dont animate this
+        card.transform  = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+        optionOne.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+        optionTwo.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+        optionThree.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+        
+        //animate card going back to original position
+        UIView.animate(withDuration: 0.2){
+            self.card.transform = CGAffineTransform.identity
+            self.optionOne.transform = CGAffineTransform.identity
+            self.optionTwo.transform = CGAffineTransform.identity
+            self.optionThree.transform = CGAffineTransform.identity
+        }
     }
 }
