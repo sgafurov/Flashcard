@@ -19,6 +19,7 @@ class firstScreenViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var falseLabel: UILabel!
+    @IBOutlet weak var popUpLabel: UILabel!
     
     @IBOutlet weak var optionOne: UIButton!
     @IBOutlet weak var optionTwo: UIButton!
@@ -35,20 +36,32 @@ class firstScreenViewController: UIViewController {
     var flashcards = [Flashcard]() //array to hold all flashcards structs
     var currentIndex = 0 //to track the current flashcard index...0 is the first index in the array
     var hide:Bool = false;
+    var correctAnswerButton: UIButton! //remember which one was the correct answer
     
     /**
      * gives round corners and borders to the labels/buttons
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        popUpLabel.isHidden=true;//🌈
+        
         card.layer.cornerRadius = 20.0;
-        card.clipsToBounds = true;
+        card.clipsToBounds = true; //🌈
+        //card.layer.shadowRadius = 55.0
+        //card.layer.shadowOpacity = 0.3
         
         questionLabel.layer.cornerRadius = 20.0;
+        questionLabel.clipsToBounds = true; //🌈
         questionLabel.layer.borderWidth = 3.0;
         questionLabel.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
+        //answerLabel.layer.cornerRadius = 20.0;
+        //answerLabel.clipsToBounds = true; //🌈
+        //answerLabel.layer.borderWidth = 3.0;
+        //answerLabel.layer.borderColor = #colorLiteral(red: 0.5485007167, green: 1, blue: 0.5137608051, alpha: 1)
+        
         falseLabel.layer.cornerRadius = 20.0;
+        falseLabel.clipsToBounds = true; //🌈
         falseLabel.layer.borderWidth = 3.0;
         falseLabel.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
@@ -63,10 +76,6 @@ class firstScreenViewController: UIViewController {
         optionThree.layer.cornerRadius = 20.0;
         optionThree.layer.borderWidth = 3.0;
         optionThree.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        
-//        plusButton.layer.cornerRadius = 8.0;
-//        plusButton.layer.borderWidth = 1.0;
-//        plusButton.layer.borderColor = #colorLiteral(red: 0.1285564005, green: 0.3894066513, blue: 1, alpha: 1)
         
         editButton.layer.cornerRadius = 8.0;
         editButton.layer.borderWidth = 1.0;
@@ -86,6 +95,7 @@ class firstScreenViewController: UIViewController {
         }
     }
     
+    //makes the items bounce-in when app first opens
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
         
@@ -103,7 +113,7 @@ class firstScreenViewController: UIViewController {
         optionThree.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
         
         //animation
-        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+        UIView.animate(withDuration: 0.9, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
             self.card.alpha = 1
             self.card.transform = CGAffineTransform.identity
             
@@ -132,13 +142,16 @@ class firstScreenViewController: UIViewController {
         falseLabel.isHidden = true
         
         if segue.identifier == "EditSegue"{
+            optionOne.isEnabled = true;
+            optionTwo.isEnabled = true;
+            optionThree.isEnabled = true;
             
         creationController.initialQuestion = questionLabel.text;
         creationController.initialAnswer = answerLabel.text;
             
-            creationController.extraInitialAnswer1 =  optionOne.titleLabel?.text
+            creationController.initialAnswer =  optionOne.titleLabel?.text
             
-            creationController.initialAnswer =  optionTwo.titleLabel?.text
+            creationController.extraInitialAnswer1 =  optionTwo.titleLabel?.text
            
             creationController.extraInitialAnswer2 =  optionThree.titleLabel?.text
         }
@@ -195,12 +208,29 @@ class firstScreenViewController: UIViewController {
     func updateLabels(){
         //get current flashcard
         let currentFlashcard = flashcards[currentIndex]
+        
         //update our labels
-        questionLabel.text = currentFlashcard.question
-        answerLabel.text = currentFlashcard.answer;
-        optionOne.setTitle(currentFlashcard.extraAnswerOne, for: .normal) //the first button on the screen
-        optionTwo.setTitle(currentFlashcard.answer, for: .normal) //the middle button (that has the correct answer)
-        optionThree.setTitle(currentFlashcard.extraAnswerTwo, for: .normal) //the last button
+                questionLabel.text = currentFlashcard.question
+                answerLabel.text = currentFlashcard.answer;
+        
+        //put our multiple choice buttons in an array and shuffle them + Update Them
+        let buttons = [optionOne,optionTwo,optionThree].shuffled()
+        let answers = [currentFlashcard.answer, currentFlashcard.extraAnswerOne, currentFlashcard.extraAnswerTwo].shuffled()
+        
+        for (button, answer) in zip(buttons, answers){
+            //set the title of this random button with a random answer
+            button?.setTitle(answer, for: .normal)
+        
+        //check if this is the correct answer. if so, save the button
+        if answer == currentFlashcard.answer{
+            correctAnswerButton = button
+        }
+        }
+        
+
+//        optionOne.setTitle(currentFlashcard.extraAnswerOne, for: .normal) //the first button on the screen
+//        optionTwo.setTitle(currentFlashcard.answer, for: .normal) //the middle button (that has the correct answer)
+//        optionThree.setTitle(currentFlashcard.extraAnswerTwo, for: .normal) //the last button
     }
     
     /**
@@ -239,64 +269,90 @@ class firstScreenViewController: UIViewController {
      * when we click on the big main flashcard to see Q and A.
      */
     @IBAction func didTapOnFlashcard(_ sender: Any) {
-//        if (hide == false){
-//        questionLabel.isHidden = false;
-//        answerLabel.isHidden = true;
-//        hide = true;
-//        } else if(hide==true){
-//        questionLabel.isHidden = true;
-//        answerLabel.isHidden = false;
-//        hide = false;
-//        }
         flipFlashcard();
+        popUpLabel.isHidden=true;
     }
     
     func flipFlashcard(){
-//        if (hide == false){
-//        questionLabel.isHidden = false;
-//        answerLabel.isHidden = true;
-//        hide = true;
-//        } else if(hide==true){
-//        questionLabel.isHidden = true;
-//        answerLabel.isHidden = false;
-//        hide = false;
-//        }
-        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
-            if (self.hide == true){
-                self.questionLabel.isHidden = true;
-                self.answerLabel.isHidden = false;
-                self.hide = false;
-            } else if(self.hide==false){
+
+        UIView.transition(with: card, duration: 0.25, options: .transitionFlipFromRight, animations: {
+            if (self.hide == false){
                 self.questionLabel.isHidden = false;
                 self.answerLabel.isHidden = true;
                 self.hide = true;
+            } else if(self.hide == true){
+                self.questionLabel.isHidden = true;
+                self.answerLabel.isHidden = false;
+                self.hide = false;
             }
         })
 
     }
     
-    @IBAction func didTapOptionOne(_ sender: Any) {
-        questionLabel.isHidden = true;
-        answerLabel.isHidden = true;
-        falseLabel.isHidden = false;
+    func flipFlashcardOnce(){
+        
+        UIView.transition(with: card, duration: 0.25, options: .transitionFlipFromRight, animations: {
+            self.questionLabel.isHidden = true
+            self.answerLabel.isHidden = false;
+            self.falseLabel.isHidden = true;
+        })
+        
     }
     
+    @IBAction func didTapOptionOne(_ sender: Any) {
+        popUpLabel.isHidden=true;//🌈
+        
+        //if correct answer chosen, flip the flaashcard. if not, disable the button
+        if optionOne == correctAnswerButton{
+            hide = false;
+            flipFlashcardOnce()
+            popUpLabel.isHidden=false;//🌈
+            animatePopUpLabel()
+        } else {
+            questionLabel.isHidden = false;
+            optionOne.isEnabled = false;
+        }
+        }
+    
     @IBAction func didTapOptionTwo(_ sender: Any) {
-        questionLabel.isHidden = true;
-        falseLabel.isHidden = true;
-        answerLabel.isHidden = false;
+        popUpLabel.isHidden=true;//🌈
+        
+        //if correct answer chosen, flip the flaashcard. if not, disable the button
+        if optionTwo == correctAnswerButton{
+            hide = false;
+            flipFlashcardOnce()
+            popUpLabel.isHidden=false;//🌈
+            animatePopUpLabel()
+        } else {
+            questionLabel.isHidden = false;
+            optionTwo.isEnabled = false;
+        }
     }
     
     @IBAction func didTapOptionThree(_ sender: Any) {
-        questionLabel.isHidden = true;
-        answerLabel.isHidden = true;
-        falseLabel.isHidden = false;
+   
+        popUpLabel.isHidden=true;//🌈
+        
+        //if correct answer chosen, flip the flaashcard. if not, disable the button
+        if optionThree == correctAnswerButton{
+            hide = false;
+            flipFlashcardOnce()
+            popUpLabel.isHidden=false;//🌈
+            animatePopUpLabel()
+        } else {
+            questionLabel.isHidden = false;
+            optionThree.isEnabled = false;
+        }
+
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
         questionLabel.isHidden = false
         answerLabel.isHidden = true
         falseLabel.isHidden = true
+        popUpLabel.isHidden=true;//🌈
+        animatePopUpLabelDown();
+
         currentIndex = currentIndex + 1;
         
         updateNextPrevButtons();
@@ -306,6 +362,9 @@ class firstScreenViewController: UIViewController {
         questionLabel.isHidden = false
         answerLabel.isHidden = true
         falseLabel.isHidden = true
+        popUpLabel.isHidden=true;//🌈
+        animatePopUpLabelDown();
+
         currentIndex = currentIndex - 1;
         
         updateNextPrevButtons();
@@ -336,7 +395,11 @@ class firstScreenViewController: UIViewController {
         //if we delete the only flashcard in the app, set currentIndex to 0 and fill flashcard with generic texts
         if flashcards.count == 0 {
             currentIndex = 0;
-            updateFlashcard(question: "-----", answer: "-----", extraAnswerOne: "-----", extraAnswerTwo: "-----", isExisting: false);
+            updateFlashcard(question: "Enter some text", answer: " ", extraAnswerOne: " ", extraAnswerTwo: " ", isExisting: false);
+            optionOne.isEnabled=false;
+            optionTwo.isEnabled=false;
+            optionThree.isEnabled=false;
+            answerLabel.isHidden=true;
         }
         updateNextPrevButtons()
         updateLabels()
@@ -344,11 +407,11 @@ class firstScreenViewController: UIViewController {
     }
     
     func animateCardOutNext(){
-        UIView.animate(withDuration: 0.3, animations: {
-            self.card.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
-            self.optionOne.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
-            self.optionTwo.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
-            self.optionThree.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+        UIView.animate(withDuration: 0.15, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
+            self.optionOne.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
+            self.optionTwo.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
+            self.optionThree.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
         }, completion: { finished in
             self.updateLabels()
             self.animateCardInNext()
@@ -357,13 +420,13 @@ class firstScreenViewController: UIViewController {
     func animateCardInNext(){
         
         //start on the right side and dont animate this
-        card.transform  = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
-        optionOne.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
-        optionTwo.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
-        optionThree.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+        card.transform  = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
+        optionOne.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
+        optionTwo.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
+        optionThree.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
         
         //animate card going back to original position
-        UIView.animate(withDuration: 0.3){
+        UIView.animate(withDuration: 0.15){
             self.card.transform = CGAffineTransform.identity
             self.optionOne.transform = CGAffineTransform.identity
             self.optionTwo.transform = CGAffineTransform.identity
@@ -372,11 +435,11 @@ class firstScreenViewController: UIViewController {
     }
     
     func animateCardOutPrev(){
-        UIView.animate(withDuration: 0.2, animations: {
-            self.card.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
-            self.optionOne.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
-            self.optionTwo.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
-            self.optionThree.transform = CGAffineTransform.identity.translatedBy(x: 350, y: 0)
+        UIView.animate(withDuration: 0.15, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
+            self.optionOne.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
+            self.optionTwo.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
+            self.optionThree.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
         }, completion: { finished in
             self.updateLabels()
             self.animateCardInPrev()
@@ -385,17 +448,31 @@ class firstScreenViewController: UIViewController {
     func animateCardInPrev(){
         
         //start on the right side and dont animate this
-        card.transform  = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
-        optionOne.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
-        optionTwo.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
-        optionThree.transform = CGAffineTransform.identity.translatedBy(x: -350, y: 0)
+        card.transform  = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
+        optionOne.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
+        optionTwo.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
+        optionThree.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
         
         //animate card going back to original position
-        UIView.animate(withDuration: 0.2){
+        UIView.animate(withDuration: 0.15){
             self.card.transform = CGAffineTransform.identity
             self.optionOne.transform = CGAffineTransform.identity
             self.optionTwo.transform = CGAffineTransform.identity
             self.optionThree.transform = CGAffineTransform.identity
         }
     }
-}
+    
+    func animatePopUpLabel(){
+        UIView.animate(withDuration: 0.25, animations: {
+            self.popUpLabel.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -17)
+        })
+        }
+    
+    func animatePopUpLabelDown(){
+        UIView.animate(withDuration: 0.25, animations: {
+            self.popUpLabel.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 17)
+        })
+     }
+        
+    
+} //end of program

@@ -10,8 +10,8 @@ import UIKit
 class secondScreenViewController: UIViewController {
     
     @IBOutlet weak var questionTextField: UITextField!
-    @IBOutlet weak var extraAnswerTextField1: UITextField!
     @IBOutlet weak var answerTextField: UITextField!
+    @IBOutlet weak var extraAnswerTextField1: UITextField!
     @IBOutlet weak var extraAnswerTextField2: UITextField!
     
     /**
