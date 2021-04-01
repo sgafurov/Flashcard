@@ -14,7 +14,7 @@ struct Flashcard {
 }
 
 class firstScreenViewController: UIViewController {
-
+    
     @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var card: UIView!
@@ -43,19 +43,19 @@ class firstScreenViewController: UIViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        popUpLabel.isHidden=true;//🌈
+        popUpLabel.isHidden = true;
         hide = true;
         
         card.layer.cornerRadius = 20.0;
-        card.clipsToBounds = true; //🌈
+        card.clipsToBounds = true; 
         
         questionLabel.layer.cornerRadius = 20.0;
-        questionLabel.clipsToBounds = true; //🌈
+        questionLabel.clipsToBounds = true;
         questionLabel.layer.borderWidth = 3.0;
         questionLabel.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         falseLabel.layer.cornerRadius = 20.0;
-        falseLabel.clipsToBounds = true; //🌈
+        falseLabel.clipsToBounds = true;
         falseLabel.layer.borderWidth = 3.0;
         falseLabel.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
@@ -130,7 +130,7 @@ class firstScreenViewController: UIViewController {
         let creationController = navigationController.topViewController as! secondScreenViewController
         creationController.flashcardsController = self;
         
-        //sets the question label to be the first label you see when you press DONE. you see the question label and not the previous answer you left off
+        //sets the question label to be the first and only label you see when you press DONE button.
         questionLabel.isHidden = false
         answerLabel.isHidden = true
         falseLabel.isHidden = true
@@ -140,14 +140,32 @@ class firstScreenViewController: UIViewController {
             optionTwo.isEnabled = true;
             optionThree.isEnabled = true;
             
-        creationController.initialQuestion = questionLabel.text;
-        creationController.initialAnswer = answerLabel.text;
+            //sending what we have in our flashcard screen to pre-fill the text fields in the editing screen
+            creationController.initialQuestion = questionLabel.text;
+            creationController.initialAnswer = answerLabel.text;
             
             creationController.initialAnswer =  optionOne.titleLabel?.text
-            
             creationController.extraInitialAnswer1 =  optionTwo.titleLabel?.text
-           
             creationController.extraInitialAnswer2 =  optionThree.titleLabel?.text
+            
+//            if optionOne == correctAnswerButton{
+//                creationController.initialAnswer =  optionOne.titleLabel?.text
+//            } else {
+//                creationController.initialAnswer =  optionOne.titleLabel?.text
+//            }
+//
+//            if optionTwo == correctAnswerButton{
+//                creationController.initialAnswer =  optionTwo.titleLabel?.text
+//            } else {
+//                creationController.extraInitialAnswer1 =  optionTwo.titleLabel?.text
+//            }
+//
+//            if optionThree == correctAnswerButton{
+//                creationController.initialAnswer =  optionThree.titleLabel?.text
+//            } else {
+//                creationController.extraInitialAnswer2 =  optionThree.titleLabel?.text
+//            }
+            
         }
     }
     
@@ -166,21 +184,26 @@ class firstScreenViewController: UIViewController {
         // optionOne.setTitle(flashcard.extraAnswerOne, for: .normal) //the first button on the screen
         // optionTwo.setTitle(flashcard.answer, for: .normal) //the middle button (that has the correct answer)
         // optionThree.setTitle(flashcard.extraAnswerTwo, for: .normal) //the last button
-                
+        
         if isExisting {
             //replace the existing flashcard
             flashcards[currentIndex] = flashcard
         } else {
-        flashcards.append(flashcard) //appending the flashcard object we created above in this method, into the array
-        print("I added a new flashcard!")
-        print("I now have \(flashcards.count) flashcard!")
-        currentIndex = flashcards.count-1
-        print("Our current index is \(currentIndex)")
+            flashcards.append(flashcard) //appending the flashcard object we created above in this method, into the array
+            print("I added a new flashcard!")
+            print("I now have \(flashcards.count) flashcard!")
+            currentIndex = flashcards.count-1
+            print("Our current index is \(currentIndex)")
         }
-            //updates the prev and next buttons everytime we add a flashcard
+        //updates the prev and next buttons everytime we add a flashcard
         updateNextPrevButtons();
         updateLabels();
         saveAllFlashcardsToDisk()
+        
+        //makes all answer buttons enabled once you tap on the edit button
+        optionOne.isEnabled = true
+        optionTwo.isEnabled = true
+        optionThree.isEnabled = true
     }
     
     func updateNextPrevButtons(){
@@ -204,8 +227,8 @@ class firstScreenViewController: UIViewController {
         let currentFlashcard = flashcards[currentIndex]
         
         //update our labels
-                questionLabel.text = currentFlashcard.question
-                answerLabel.text = currentFlashcard.answer;
+        questionLabel.text = currentFlashcard.question
+        answerLabel.text = currentFlashcard.answer;
         
         //put our multiple choice buttons in an array and shuffle them + Update Them
         let buttons = [optionOne,optionTwo,optionThree].shuffled()
@@ -214,17 +237,15 @@ class firstScreenViewController: UIViewController {
         for (button, answer) in zip(buttons, answers){
             //set the title of this random button with a random answer
             button?.setTitle(answer, for: .normal)
-        
-        //check if this is the correct answer. if so, save the button
-        if answer == currentFlashcard.answer{
-            correctAnswerButton = button
+            
+            //check if this is the correct answer. if so, save the button
+            if answer == currentFlashcard.answer{
+                correctAnswerButton = button
+            }
         }
-        }
-        
-
-//        optionOne.setTitle(currentFlashcard.extraAnswerOne, for: .normal) //the first button on the screen
-//        optionTwo.setTitle(currentFlashcard.answer, for: .normal) //the middle button (that has the correct answer)
-//        optionThree.setTitle(currentFlashcard.extraAnswerTwo, for: .normal) //the last button
+        //        optionOne.setTitle(currentFlashcard.extraAnswerOne, for: .normal) //the first button on the screen
+        //        optionTwo.setTitle(currentFlashcard.answer, for: .normal) //the middle button (that has the correct answer)
+        //        optionThree.setTitle(currentFlashcard.extraAnswerTwo, for: .normal) //the last button
     }
     
     /**
@@ -239,8 +260,8 @@ class firstScreenViewController: UIViewController {
             return ["question": card.question, "answer": card.answer, "optionOne": card.extraAnswerOne, "optionThree": card.extraAnswerTwo]
         }
         UserDefaults.standard.set(dictionaryArray, forKey: "flashcards")
-            //log it
-            print("Flashcards saved to UserDefaults!!!")
+        //log it
+        print("Flashcards saved to UserDefaults!!!")
     }
     
     /**
@@ -268,7 +289,7 @@ class firstScreenViewController: UIViewController {
     }
     
     func flipFlashcard(){
-
+        
         UIView.transition(with: card, duration: 0.25, options: .transitionFlipFromRight, animations: {
             if (self.hide == false){
                 self.questionLabel.isHidden = false;
@@ -280,7 +301,7 @@ class firstScreenViewController: UIViewController {
                 self.hide = false;
             }
         })
-
+        
     }
     
     func flipFlashcardOnce(){
@@ -294,28 +315,28 @@ class firstScreenViewController: UIViewController {
     }
     
     @IBAction func didTapOptionOne(_ sender: Any) {
-        popUpLabel.isHidden=true;//🌈
+        popUpLabel.isHidden = true;
         
         //if correct answer chosen, flip the flaashcard. if not, disable the button
         if optionOne == correctAnswerButton{
             hide = false;
             flipFlashcardOnce()
-            popUpLabel.isHidden=false;//🌈
+            popUpLabel.isHidden = false;
             animatePopUpLabel()
         } else {
             questionLabel.isHidden = false;
             optionOne.isEnabled = false;
         }
-        }
+    }
     
     @IBAction func didTapOptionTwo(_ sender: Any) {
-        popUpLabel.isHidden=true;//🌈
+        popUpLabel.isHidden = true;
         
         //if correct answer chosen, flip the flaashcard. if not, disable the button
         if optionTwo == correctAnswerButton{
             hide = false;
             flipFlashcardOnce()
-            popUpLabel.isHidden=false;//🌈
+            popUpLabel.isHidden = false;
             animatePopUpLabel()
         } else {
             questionLabel.isHidden = false;
@@ -324,29 +345,34 @@ class firstScreenViewController: UIViewController {
     }
     
     @IBAction func didTapOptionThree(_ sender: Any) {
-   
-        popUpLabel.isHidden=true;//🌈
+        
+        popUpLabel.isHidden=true;
         
         //if correct answer chosen, flip the flaashcard. if not, disable the button
         if optionThree == correctAnswerButton{
             hide = false;
             flipFlashcardOnce()
-            popUpLabel.isHidden=false;//🌈
+            popUpLabel.isHidden = false;
             animatePopUpLabel()
         } else {
             questionLabel.isHidden = false;
             optionThree.isEnabled = false;
         }
-
+        
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
         questionLabel.isHidden = false
         answerLabel.isHidden = true
         falseLabel.isHidden = true
-        popUpLabel.isHidden=true;//🌈
+        popUpLabel.isHidden = true;
         animatePopUpLabelDown();
-
+        
+        //this is so the disabled buttons on the prev screen dont stay disabled on next screen
+        optionOne.isEnabled = true
+        optionTwo.isEnabled = true
+        optionThree.isEnabled = true
+        
         currentIndex = currentIndex + 1;
         
         updateNextPrevButtons();
@@ -356,9 +382,14 @@ class firstScreenViewController: UIViewController {
         questionLabel.isHidden = false
         answerLabel.isHidden = true
         falseLabel.isHidden = true
-        popUpLabel.isHidden=true;//🌈
+        popUpLabel.isHidden = true;
         animatePopUpLabelDown();
-
+        
+        //this is so the disabled buttons on the next screen dont stay disabled on prev screen
+        optionOne.isEnabled = true
+        optionTwo.isEnabled = true
+        optionThree.isEnabled = true
+        
         currentIndex = currentIndex - 1;
         
         updateNextPrevButtons();
@@ -460,13 +491,13 @@ class firstScreenViewController: UIViewController {
         UIView.animate(withDuration: 0.25, animations: {
             self.popUpLabel.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -17)
         })
-        }
+    }
     
     func animatePopUpLabelDown(){
         UIView.animate(withDuration: 0.25, animations: {
             self.popUpLabel.transform = CGAffineTransform.identity.translatedBy(x: 0, y: 17)
         })
-     }
-        
+    }
+    
     
 } //end of program

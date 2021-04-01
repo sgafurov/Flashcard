@@ -10,7 +10,7 @@ import UIKit
 class secondScreenViewController: UIViewController {
     
     @IBOutlet weak var questionTextField: UITextField!
-    @IBOutlet weak var answerTextField: UITextField!
+    @IBOutlet weak var answerTextField: UITextField! //🌈 changed name
     @IBOutlet weak var extraAnswerTextField1: UITextField!
     @IBOutlet weak var extraAnswerTextField2: UITextField!
     
@@ -44,20 +44,20 @@ class secondScreenViewController: UIViewController {
                 
         let questionText = questionTextField.text //this var holds whatever is typed into the question's text field
 
-        let answerText = answerTextField.text //holds whatever is typed into the answer text field
+        let correctAnswerText = answerTextField.text //holds whatever is typed into the answer text field
         
         let extraanswerText1 = extraAnswerTextField1.text //for the first button
         
         let extraanswerText2 = extraAnswerTextField2.text //for the last button
 
-        if (questionText == " " || answerText == " " || questionText!.isEmpty || answerText!.isEmpty) {
+        if (questionText == " " || correctAnswerText == " " || questionText!.isEmpty || correctAnswerText!.isEmpty) {
             present(alert, animated: true)
         } else {
             var isExisting = false;
             if initialQuestion != nil {
                 isExisting = true
             }
-            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswerOne: extraanswerText1!, extraAnswerTwo: extraanswerText2!, isExisting: isExisting)
+            flashcardsController.updateFlashcard(question: questionText!, answer: correctAnswerText!, extraAnswerOne: extraanswerText1!, extraAnswerTwo: extraanswerText2!, isExisting: isExisting)
         dismiss(animated: true)
         }
     }
