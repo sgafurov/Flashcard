@@ -1,7 +1,30 @@
+## Lab 4
+
+### App Description
+This app helps you to memorize answers to questions. There are three answers to choose from to check and if you tap on the correct answer, you will get a pop up label notifiying you. Answer labels are randomized so that the three options aren't stationary. You can add, edit, and delete flashcards. This app can remember the flashcards you made when you exit and revisit the app.
+
+### App Walk-though
+
+<img src="YOUR_GIF_URL_HERE" width=200><br>
+
+## Required
+- [x] User should see the app icon 
+- [x] User should see a splash screen
+- [x] User should see an flip animation when revealing the answer
+- [x] User should see a slide animation when going to the next flashcard
+- [x] User should see a slide animation when going to the previous flashcard
+- [x] Push code to GitHub
+## Optional
+- [ ] User should see a nicer flaschard with rounded corners, shadows, and animating when showing the first time
+- [ ] User should see all views properly layout when using the app on a phone of different sizes
+- [ ] Correct answer in multiple choice should be random
+
+
+
 ## Lab 3
 
 ### App Description
-This app helps you to memorize answers to questions. There are three selections to choose from to check and see if the answer you selected is the correct one. For now, only the middle answer can be set as the correct answer. You can add, edit, and delete flashcards. This app can remember the flashcards you made when you exit and revisit the app.
+This app helps you to memorize answers to questions. There are three answers to choose from. For now, only the middle answer can be set as the correct answer. You can add, edit, and delete flashcards. This app can remember the flashcards you made when you exit and revisit the app.
 
 ### App Walk-though
 
