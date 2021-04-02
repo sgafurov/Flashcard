@@ -136,36 +136,60 @@ class firstScreenViewController: UIViewController {
         falseLabel.isHidden = true
         
         if segue.identifier == "EditSegue"{
+            print("editing now!");
             optionOne.isEnabled = true;
             optionTwo.isEnabled = true;
             optionThree.isEnabled = true;
             
             //sending what we have in our flashcard screen to pre-fill the text fields in the editing screen
             creationController.initialQuestion = questionLabel.text;
-            creationController.initialAnswer = answerLabel.text;
-            
-            creationController.initialAnswer =  optionOne.titleLabel?.text
-            creationController.extraInitialAnswer1 =  optionTwo.titleLabel?.text
-            creationController.extraInitialAnswer2 =  optionThree.titleLabel?.text
-            
-            
-//            if optionOne == correctAnswerButton{
-//                creationController.initialAnswer =  optionOne.titleLabel?.text
-//            } else {
-//                creationController.initialAnswer =  optionOne.titleLabel?.text
+            //creationController.initialAnswer = answerLabel.text;
+
+            //🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈  THIS NEEDS IMPROVEMENT
+//            creationController.initialAnswer = correctAnswerButton.titleLabel?.text
+//            if optionOne != correctAnswerButton && creationController.extraInitialAnswer1 != optionTwo.titleLabel?.text && creationController.extraInitialAnswer1 != optionThree.titleLabel?.text {
+//                creationController.extraInitialAnswer1 = optionOne.titleLabel?.text
 //            }
-//
-//            if optionTwo == correctAnswerButton{
-//                creationController.initialAnswer =  optionTwo.titleLabel?.text
-//            } else {
-//                creationController.extraInitialAnswer1 =  optionTwo.titleLabel?.text
+//            if optionTwo != correctAnswerButton && creationController.extraInitialAnswer1 != optionOne.titleLabel?.text || optionTwo != correctAnswerButton && creationController.extraInitialAnswer1 != optionThree.titleLabel?.text {
+//                creationController.extraInitialAnswer1 = optionTwo.titleLabel?.text
 //            }
-//
-//            if optionThree == correctAnswerButton{
-//                creationController.initialAnswer =  optionThree.titleLabel?.text
-//            } else {
-//                creationController.extraInitialAnswer2 =  optionThree.titleLabel?.text
+//            if optionTwo != correctAnswerButton && creationController.extraInitialAnswer1 != optionOne.titleLabel?.text || optionTwo != correctAnswerButton && creationController.extraInitialAnswer1 != optionThree.titleLabel?.text || optionTwo != correctAnswerButton && creationController.extraInitialAnswer2 == optionOne.titleLabel?.text || optionTwo != correctAnswerButton && creationController.extraInitialAnswer2 == optionThree.titleLabel?.text{
+//                creationController.extraInitialAnswer1 = optionTwo.titleLabel?.text
 //            }
+//            if optionThree != correctAnswerButton && creationController.extraInitialAnswer2 != optionOne.titleLabel?.text && creationController.extraInitialAnswer2 != optionTwo.titleLabel?.text {
+//                creationController.extraInitialAnswer2 = optionThree.titleLabel?.text
+//            }
+            
+            
+            
+            
+            
+            //🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈🌈  THIS ONES GOOD
+                        if optionOne == correctAnswerButton {
+                        creationController.initialAnswer = optionOne.titleLabel?.text
+                        } else if ((optionOne != correctAnswerButton && creationController.extraInitialAnswer1 == optionTwo.titleLabel?.text) || (optionOne != correctAnswerButton && creationController.extraInitialAnswer1 == optionThree.titleLabel?.text)) {
+                            creationController.extraInitialAnswer2 = optionOne.titleLabel?.text
+                        } else {
+                            creationController.extraInitialAnswer1 = optionOne.titleLabel?.text
+                        }
+            
+                        if optionTwo == correctAnswerButton{
+                        creationController.initialAnswer =  optionTwo.titleLabel?.text
+                        } else if ((optionTwo != correctAnswerButton && creationController.extraInitialAnswer1 == optionOne.titleLabel?.text) || (optionTwo != correctAnswerButton && creationController.extraInitialAnswer1 == optionThree.titleLabel?.text)) {
+                            creationController.extraInitialAnswer2 =  optionTwo.titleLabel?.text
+                        } else {
+                            creationController.extraInitialAnswer1 = optionTwo.titleLabel?.text
+                        }
+            
+                        if optionThree == correctAnswerButton{
+                            creationController.initialAnswer = optionThree.titleLabel?.text
+                        } else if ((optionThree != correctAnswerButton && creationController.extraInitialAnswer1 == optionOne.titleLabel?.text) || (optionThree != correctAnswerButton && creationController.extraInitialAnswer1 == optionTwo.titleLabel?.text)) {
+                            creationController.extraInitialAnswer2 = optionThree.titleLabel?.text
+                        } else {
+                            creationController.extraInitialAnswer1 = optionThree.titleLabel?.text
+                        }
+            
+            
             
         }
     }
@@ -243,10 +267,12 @@ class firstScreenViewController: UIViewController {
             if answer == currentFlashcard.answer{
                 correctAnswerButton = button
             }
+ 
         }
         //        optionOne.setTitle(currentFlashcard.extraAnswerOne, for: .normal) //the first button on the screen
         //        optionTwo.setTitle(currentFlashcard.answer, for: .normal) //the middle button (that has the correct answer)
         //        optionThree.setTitle(currentFlashcard.extraAnswerTwo, for: .normal) //the last button
+        print("we shuffled!");
     }
     
     /**
