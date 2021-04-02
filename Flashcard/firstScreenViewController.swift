@@ -148,6 +148,7 @@ class firstScreenViewController: UIViewController {
             creationController.extraInitialAnswer1 =  optionTwo.titleLabel?.text
             creationController.extraInitialAnswer2 =  optionThree.titleLabel?.text
             
+            
 //            if optionOne == correctAnswerButton{
 //                creationController.initialAnswer =  optionOne.titleLabel?.text
 //            } else {
@@ -345,8 +346,7 @@ class firstScreenViewController: UIViewController {
     }
     
     @IBAction func didTapOptionThree(_ sender: Any) {
-        
-        popUpLabel.isHidden=true;
+        popUpLabel.isHidden = true;
         
         //if correct answer chosen, flip the flaashcard. if not, disable the button
         if optionThree == correctAnswerButton{
