@@ -4,8 +4,8 @@
 This app helps you to memorize answers to questions. There are three answers to choose from to check and if you tap on the correct answer, you will get a pop up label notifiying you. Answer labels are randomized so that the three options aren't stationary. You can add, edit, and delete flashcards. This app can remember the flashcards you made when you exit and revisit the app.
 
 ### App Walk-though
-
-<img src="" width=200><br>
+Required:
+<img src="https://im3.ezgif.com/tmp/ezgif-3-77036876fae1.gif" width=200><br>
 
 ## Required
 - [x] User should see the app icon 
