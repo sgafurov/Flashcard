@@ -5,7 +5,7 @@ This app helps you to memorize answers to questions. There are three answers to 
 
 ### App Walk-though
 Required:
-<img src="https://im3.ezgif.com/tmp/ezgif-3-77036876fae1.gif" width=200><br>
+<img src="https://user-images.githubusercontent.com/ezgif-3-77036876fae1.gif" width=200><br>
 
 ## Required
 - [x] User should see the app icon 
