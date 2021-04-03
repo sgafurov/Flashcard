@@ -8,7 +8,7 @@ Required:
 <img src="https://github.com/shakhramg/Flashcard/blob/main/ezgif-3-77036876fae1.gif?raw=true" width=200><br>
 
 Optional:
-<img src="https://github.com/shakhramg/Flashcard/blob/main/ezgif-3-77036876fae1.gif?raw=true" width=200><br>
+<img src="https://github.com/shakhramg/Flashcard/blob/main/ezgif-7-a643cf5660fd.gif?raw=true" width=200><br>
 
 ## Required
 - [x] User should see the app icon 
